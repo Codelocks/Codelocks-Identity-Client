@@ -3,7 +3,8 @@
 namespace Codelocks\Identity\Contracts;
 
 use Illuminate\Contracts\Auth\Authenticatable;
-use Laravel\Socialite\Two\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 /**
  * @extends Authenticatable
@@ -25,6 +26,7 @@ trait StoreAuthorizedUser
                 'email'             => data_get($authUser, 'email'),
                 'avatar'            => data_get($authUser, 'avatar'),
                 'orggid'            => data_get($authUser, 'orggid'),
+                'password'          => Hash::make(Str::password()),
             ]);
         }
         return $user;
