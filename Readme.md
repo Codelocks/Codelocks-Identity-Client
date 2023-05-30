@@ -1,5 +1,7 @@
 # Codelocks Identity Client 
 
+Laravel package for Codelocks Identity
+
 ## install 
 ```shell
 composer require codelocks/identity-client
