@@ -21,11 +21,13 @@ return new class extends Migration {
             ) {
                 $table->string('oauth_provider', 100);
                 $table->string('oauth_provider_id', 100);
+                $table->index(['oauth_provider', 'oauth_provider_id'], 'i_oauth_providers');
+            }
+            if(!Schema::hasColumn('users', 'token')) {
                 $table->string('token',2000)->nullable();
                 $table->string('refresh_token',2000)->nullable();
                 $table->dateTime('expired_at')->nullable();
                 $table->string('scopes')->nullable();
-                $table->index(['oauth_provider', 'oauth_provider_id'], 'i_oauth_providers');
             }
 
             if (!Schema::hasColumn('users', 'orggid'))
