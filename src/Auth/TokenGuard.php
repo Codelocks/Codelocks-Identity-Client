@@ -77,7 +77,7 @@ class TokenGuard implements Guard
      *
      * @return string
      */
-    public function getTokenForRequest(): string
+    public function getTokenForRequest(): ?string
     {
         $token = $this->request->query($this->inputKey);
 
