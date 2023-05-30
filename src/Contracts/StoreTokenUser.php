@@ -7,5 +7,5 @@ use Laravel\Socialite\Two\User;
 
 interface StoreTokenUser
 {
-    public function findAuthorizedUser(User $user): Authenticatable;
+    public function findAuthorizedUser($user): Authenticatable;
 }

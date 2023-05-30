@@ -11,21 +11,22 @@ use Laravel\Socialite\Two\User;
  */
 trait StoreAuthorizedUser
 {
-    public function findAuthorizedUser(User $authUser): Authenticatable
+    public function findAuthorizedUser($authUser): Authenticatable
     {
-        $user = $this->where('oauth_provider_id', $authUser->id)
+        $user = $this->where('oauth_provider_id', data_get($authUser, 'id'))
             ->where('oauth_provider', config('identity.provider_name'))
             ->first();
-        if (!$user)
+        if (!$user) {
             $user = new static();
-        $user->forceFill([
-            'oauth_provider_id' => $authUser->id,
-            'oauth_provider'    => config('identity.provider_name'),
-            'name'              => $authUser->name,
-            'email'             => $authUser->email,
-            'avatar'            => $authUser->avatar,
-            'orggid'            => data_get($authUser, 'orggid'),
-        ]);
+            $user->forceFill([
+                'oauth_provider_id' => data_get($authUser, 'id'),
+                'oauth_provider'    => config('identity.provider_name'),
+                'name'              => data_get($authUser, 'name'),
+                'email'             => data_get($authUser, 'email'),
+                'avatar'            => data_get($authUser, 'avatar'),
+                'orggid'            => data_get($authUser, 'orggid'),
+            ]);
+        }
         return $user;
     }
 }

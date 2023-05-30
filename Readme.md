@@ -30,9 +30,9 @@ use App\Models\User;
 
 public function boot(): void
 {
-   ClientServiceProvider::registerRoutes()
-   ClientServiceProvider::registerUserModel(User::class)
-   ClientServiceProvider::registerGuardDriver('identity-token')
+   ClientServiceProvider::registerRoutes();
+   ClientServiceProvider::registerUserModel(User::class);
+   ClientServiceProvider::registerGuardDriver('identity-token');
 }
 ```
 
