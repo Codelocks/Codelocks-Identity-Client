@@ -1,0 +1,21 @@
+{
+  "name": "codelocks/identity-client",
+  "auth": "peter.fan@codelocks.hk",
+  "require": {
+    "php": "^8.1",
+    "laravel/framework": "10.*",
+    "laravel/socialite": "^5.6"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Codelocks\\ClientServiceProvider"
+      ]
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Codelocks\\": "src/"
+    }
+  }
+}
