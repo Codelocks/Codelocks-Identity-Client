@@ -1,6 +1,6 @@
 <?php
 
-namespace Codelocks\Contracts;
+namespace Codelocks\Identity\Contracts;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Laravel\Socialite\Two\User;

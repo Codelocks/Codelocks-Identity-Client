@@ -1,6 +1,6 @@
 <?php
 
-namespace Codelocks\Socialite;
+namespace Codelocks\Identity\Socialite;
 
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Facades\Log;

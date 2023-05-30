@@ -1,8 +1,8 @@
 <?php
 
-namespace Codelocks\Auth;
+namespace Codelocks\Identity\Auth;
 
-use Codelocks\Contracts\StoreTokenUser;
+use Codelocks\Identity\Contracts\StoreTokenUser;
 use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;

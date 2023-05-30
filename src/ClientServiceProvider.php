@@ -1,10 +1,10 @@
 <?php
 
-namespace Codelocks;
+namespace Codelocks\Identity;
 
-use Codelocks\Auth\TokenGuard;
-use Codelocks\Contracts\StoreTokenUser;
-use Codelocks\Controllers\OAuthController;
+use Codelocks\Identity\Auth\TokenGuard;
+use Codelocks\Identity\Contracts\StoreTokenUser;
+use Codelocks\Identity\Controllers\OAuthController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;

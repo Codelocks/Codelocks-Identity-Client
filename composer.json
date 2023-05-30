@@ -1,6 +1,7 @@
 {
   "name": "codelocks/identity-client",
   "auth": "peter.fan@codelocks.hk",
+  "version": "1.0.0",
   "require": {
     "php": "^8.1",
     "laravel/framework": "10.*",
@@ -9,13 +10,13 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Codelocks\\ClientServiceProvider"
+        "Codelocks\\Identity\\ClientServiceProvider"
       ]
     }
   },
   "autoload": {
     "psr-4": {
-      "Codelocks\\": "src/"
+      "Codelocks\\Identity\\": "src/"
     }
   }
 }

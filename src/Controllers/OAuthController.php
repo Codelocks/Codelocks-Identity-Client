@@ -1,9 +1,9 @@
 <?php
 
-namespace Codelocks\Controllers;
+namespace Codelocks\Identity\Controllers;
 
-use Codelocks\Contracts\StoreTokenUser;
-use Codelocks\Socialite\CodelocksIdentityProvider;
+use Codelocks\Identity\Contracts\StoreTokenUser;
+use Codelocks\Identity\Socialite\CodelocksIdentityProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
