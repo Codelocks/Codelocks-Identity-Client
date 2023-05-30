@@ -52,3 +52,12 @@ return [
     ],
 ]
 ```
+## update routes
+```shell
+Route::middleware('auth:api')->group(function () {
+
+  //... roues
+});
+
+}
+```
