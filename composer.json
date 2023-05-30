@@ -7,7 +7,7 @@
       "email": "peter.fan@codelocks.hk"
     }
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "require": {
     "php": "^8.1",
     "laravel/framework": "10.*",
