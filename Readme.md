@@ -2,7 +2,7 @@
 
 ## install 
 ```shell
-composer require <repo>
+composer require codelocks/identity-client
 php artisan vender:publish --provider Codelocks\Identity\ClientServiceProvider
 
 ```
