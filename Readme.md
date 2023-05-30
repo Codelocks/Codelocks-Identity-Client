@@ -4,6 +4,11 @@
 ```shell
 composer require <repo>
 php artisan vender:publish --provider Codelocks\Identity\ClientServiceProvider
+
+```
+## migrate users table
+```shell
+php artisan migrate
 ```
 
 ## update user model
