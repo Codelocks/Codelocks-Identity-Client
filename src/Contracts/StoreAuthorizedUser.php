@@ -9,7 +9,7 @@ use Laravel\Socialite\Two\User;
  * @extends Authenticatable
  * @extends \Illuminate\Database\Eloquent\Model
  */
-trait TokenUser
+trait StoreAuthorizedUser
 {
     public function findAuthorizedUser(User $authUser): Authenticatable
     {

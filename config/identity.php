@@ -4,7 +4,7 @@ return [
     'provider_name' => env('CODELOCKS_PROVIDER_NAME', 'Codelocks Identity'),
     'client_id'     => env('CODELOCKS_CLIENT_ID'),
     'client_secret' => env('CODELOCKS_CLIENT_SECRET'),
-    'redirect'      => env('CODELOCKS_OAUTH_REDIRECT', route('identity.callback')),
+    'redirect'      => env('CODELOCKS_OAUTH_REDIRECT', env('APP_URL') . '/auth/callback'),
     'home'          => env('CODELOCKS_CLIENT_HOME', env('APP_URL') . '/home'),
 
     'host'          => env('CODELOCKS_OAUTH_HOST'),

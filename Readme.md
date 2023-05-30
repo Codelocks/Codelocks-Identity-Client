@@ -17,7 +17,7 @@ namespace App\Models;
 use Codelocks\Identity\Contracts\StoreTokenUser;
 use Codelocks\Identity\Contracts\StoreAuthorizedUser;
 
-class User extends Authenticatable implements AuthorizedUser
+class User extends Authenticatable implements StoreTokenUser
 {
     use HasApiTokens, HasFactory, Notifiable, StoreAuthorizedUser;
 }
