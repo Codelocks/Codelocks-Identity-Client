@@ -32,8 +32,10 @@ class ClientServiceProvider extends ServiceProvider
 
     public static function registerRoutes():void
     {
-        Route::get(config('identity.routes.redirect'), [OAuthController::class, 'redirect'])->name('identity.redirect');
-        Route::get(config('identity.routes.callback'), [OAuthController::class, 'callback'])->name('identity.callback');
+        Route::middleware('web')->group(function(){
+            Route::get(config('identity.routes.redirect'), [OAuthController::class, 'redirect'])->name('identity.redirect');
+            Route::get(config('identity.routes.callback'), [OAuthController::class, 'callback'])->name('identity.callback');
+        });
     }
 
     public static function registerUserModel(string $className): void
