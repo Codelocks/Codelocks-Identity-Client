@@ -41,7 +41,7 @@ class OAuthController extends Controller
             'token'         => $authorizedUser->token,
             'refresh_token' => $authorizedUser->refreshToken,
             'expired_at'    => now()->addSeconds($authorizedUser->expiresIn),
-            'scopes'        => $authorizedUser->approvedScopes
+            'scopes'        => implode(' ', $authorizedUser->approvedScopes)
         ])->save();
         Auth::login($user, true);
         return redirect()->intended(data_get($config, 'home'));
