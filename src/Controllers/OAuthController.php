@@ -43,6 +43,7 @@ class OAuthController extends Controller
             'expired_at'    => now()->addSeconds($authorizedUser->expiresIn),
             'scopes'        => implode(' ', $authorizedUser->approvedScopes)
         ])->save();
+        $user->current_team = data_get($authorizedUser->attributes, 'current_team');
         Auth::login($user, true);
         return redirect()->intended(data_get($config, 'home'));
     }

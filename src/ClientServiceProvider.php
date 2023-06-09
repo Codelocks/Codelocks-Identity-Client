@@ -30,11 +30,13 @@ class ClientServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/identity.php', 'identity');
     }
 
-    public static function registerRoutes():void
+    public static function registerRoutes(): void
     {
-        Route::middleware('web')->group(function(){
-            Route::get(config('identity.routes.redirect'), [OAuthController::class, 'redirect'])->name('identity.redirect');
-            Route::get(config('identity.routes.callback'), [OAuthController::class, 'callback'])->name('identity.callback');
+        Route::middleware('web')->group(function () {
+            Route::get(config('identity.routes.redirect'), [OAuthController::class, 'redirect'])
+                ->name('identity.redirect');
+            Route::get(config('identity.routes.callback'), [OAuthController::class, 'callback'])
+                ->name('identity.callback');
         });
     }
 

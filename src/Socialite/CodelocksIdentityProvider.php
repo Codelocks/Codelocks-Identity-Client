@@ -38,7 +38,8 @@ class CodelocksIdentityProvider extends AbstractProvider implements ProviderInte
         $userUrl = $this->getHost() . config('identity.user_url');
 
         $response = $this->getHttpClient()->get(
-            $userUrl, $this->getRequestOptions($token)
+            $userUrl,
+            $this->getRequestOptions($token)
         );
 
         return json_decode($response->getBody(), true);

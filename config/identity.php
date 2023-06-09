@@ -18,5 +18,6 @@ return [
     'routes'    => [
         'redirect' => '/auth/redirect',
         'callback' => '/auth/callback'
-    ]
+    ],
+    'cookie' => 'codelocks_cookie',
 ];
