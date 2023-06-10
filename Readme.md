@@ -5,8 +5,12 @@ Laravel package for Codelocks Identity
 ## install 
 ```shell
 composer require codelocks/identity-client
-php artisan vender:publish --provider Codelocks\Identity\ClientServiceProvider
 
+# publish migrations
+php artisan vendor:publish --tag identity-migrations
+
+# publish config
+php artisan vendor:publish --tag identity-config
 ```
 ## migrate users table
 ```shell
