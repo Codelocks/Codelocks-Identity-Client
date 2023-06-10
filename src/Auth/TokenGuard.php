@@ -7,11 +7,13 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Cookie\CookieValuePrefix;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 
 class TokenGuard implements Guard
@@ -25,7 +27,6 @@ class TokenGuard implements Guard
      * @var string
      */
     protected string  $inputKey;
-    private Encrypter $encryptor;
 
     /**
      * Create a new authentication guard.
@@ -38,10 +39,11 @@ class TokenGuard implements Guard
         protected Request $request,
         protected string  $name,
         protected array   $config,
+        UserProvider      $provider,
     )
     {
         $this->inputKey  = data_get($config, 'inputKey', 'token');
-        $this->encryptor = new Encrypter(config('app.key'));
+        $this->provider  = $provider;
     }
 
     public function user()
@@ -58,7 +60,7 @@ class TokenGuard implements Guard
 
         if (!empty($token)) {
             return $this->user = $this->getTokenUser($token);
-        } elseif ($this->request->cookie(config('identity.cookie'))) {
+        } elseif ($this->request->cookie(data_get($this->config, 'cookie', 'codelocks_cookie'))) {
             return $this->user = $this->authenticateViaCookie($this->request);
         }
 
@@ -79,17 +81,13 @@ class TokenGuard implements Guard
 
     public function validate(array $credentials = [])
     {
-        return !is_null((new static(
-            $credentials['request'],
-            $this->name,
-            $this->config
-        ))->user());
+        return !is_null((new static($credentials['request'], $this->name, $this->config, $this->provider))->user());
     }
 
     /**
      * Get the token for the current request.
      *
-     * @return string
+     * @return string|null
      */
     public function getTokenForRequest(): ?string
     {
@@ -151,7 +149,7 @@ class TokenGuard implements Guard
         $token = $request->header('X-CSRF-TOKEN');
 
         if (!$token && $header = $request->header('X-XSRF-TOKEN')) {
-            $token = CookieValuePrefix::remove($this->encryptor->decrypt($header, static::serialized()));
+            $token = CookieValuePrefix::remove(Crypt::decrypt($header, static::serialized()));
         }
 
         return $token;
@@ -159,13 +157,13 @@ class TokenGuard implements Guard
 
     private function decodeJwtTokenCookie(Request $request): array
     {
-        $jwt = $request->cookie(config('identity.cookie'));
+        $jwt = $request->cookie(config('identity.cookie', 'codelocks_cookie'));
 
         return (array)JWT::decode(
             true
-                ? CookieValuePrefix::remove($this->encryptor->decrypt($jwt, false))
+                ? CookieValuePrefix::remove(Crypt::decrypt($jwt, false))
                 : $jwt,
-            new Key($this->encryptor->getKey(), 'HS256')
+            new Key(Crypt::getKey(), 'HS256')
         );
     }
 

@@ -26,5 +26,6 @@
     "psr-4": {
       "Codelocks\\Identity\\": "src/"
     }
-  }
+  },
+  "minimum-stability": "dev"
 }

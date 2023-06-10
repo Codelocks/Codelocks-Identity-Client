@@ -31,4 +31,11 @@ trait StoreAuthorizedUser
         }
         return $user;
     }
+
+    public function retrieveById($sub): Authenticatable
+    {
+        return $this->where('oauth_provider_id', $sub)
+            ->where('oauth_provider', config('identity.provider_name'))
+            ->first();
+    }
 }

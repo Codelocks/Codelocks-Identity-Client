@@ -49,7 +49,8 @@ return [
         ],
         // add api guard
         'api' => [
-            'driver'=>'identity-token'
+            'driver'=>'identity-token',
+            'provider' => 'users',
         ]
     ],
 ]

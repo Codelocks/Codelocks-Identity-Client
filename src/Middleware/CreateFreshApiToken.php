@@ -8,6 +8,7 @@ use Firebase\JWT\JWT;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,16 +16,11 @@ class CreateFreshApiToken
 {
 
     private string $cookie;
-    private string $guard;
-    /**
-     * @var \Illuminate\Encryption\Encrypter
-     */
-    private Encrypter $encryptor;
+    private ?string $guard;
 
     public function __construct()
     {
-        $this->cookie    = config('identity.cookie');
-        $this->encryptor = new Encrypter(config('app.key'));
+        $this->cookie    = config('identity.cookie', 'codelocks_cookie');
     }
 
     /**
@@ -84,7 +80,7 @@ class CreateFreshApiToken
             'sub'    => $userId,
             'csrf'   => $csrfToken,
             'expiry' => $expiration->getTimestamp(),
-        ], $this->encryptor->getKey(), 'HS256');
+        ], Crypt::getKey(), 'HS256');
     }
 
     /**

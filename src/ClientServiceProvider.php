@@ -5,6 +5,8 @@ namespace Codelocks\Identity;
 use Codelocks\Identity\Auth\TokenGuard;
 use Codelocks\Identity\Contracts\StoreTokenUser;
 use Codelocks\Identity\Controllers\OAuthController;
+use Illuminate\Auth\EloquentUserProvider;
+use Illuminate\Encryption\Encrypter;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -49,10 +51,10 @@ class ClientServiceProvider extends ServiceProvider
 
     public static function registerGuardDriver($name = 'identity-token'): void
     {
-        Auth::extend($name, function (Application $app, string $name) {
+        Auth::extend($name, function (Application $app, string $name, array $config) {
             // Return an instance of Illuminate\Contracts\Auth\Guard...
-
-            return new TokenGuard($app['request'], $name, config('identity'));
+            $provider = Auth::createUserProvider($config['provider']);
+            return new TokenGuard($app['request'], $name, config('identity'), $provider);
         });
     }
 

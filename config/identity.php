@@ -20,4 +20,5 @@ return [
         'callback' => '/auth/callback'
     ],
     'cookie' => 'codelocks_cookie',
+    'key' => env('CODELOCKS_TOKEN_KEY', 'codelocks-token.key'),
 ];
