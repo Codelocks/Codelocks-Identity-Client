@@ -19,6 +19,5 @@ return [
         'redirect' => '/auth/redirect',
         'callback' => '/auth/callback'
     ],
-    'cookie' => 'codelocks_cookie',
-    'key' => env('CODELOCKS_TOKEN_KEY', 'codelocks-token.key'),
+    'cookie' => 'codelocks_cookie'
 ];
