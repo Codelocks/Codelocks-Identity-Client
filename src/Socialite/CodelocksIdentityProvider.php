@@ -12,7 +12,11 @@ class CodelocksIdentityProvider extends AbstractProvider implements ProviderInte
 {
     public function getScopes()
     {
-        return explode($this->scopeSeparator, config('identity.scopes'));
+        $scopes = config('identity.scopes');
+        if(is_string($scopes))
+            return explode($this->scopeSeparator, $scopes);
+        else
+            return $scopes;
     }
 
     protected $scopeSeparator = ' ';

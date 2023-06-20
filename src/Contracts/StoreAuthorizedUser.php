@@ -19,16 +19,16 @@ trait StoreAuthorizedUser
             ->first();
         if (!$user) {
             $user = new static();
-            $user->forceFill([
-                'oauth_provider_id' => data_get($authUser, 'id'),
-                'oauth_provider'    => config('identity.provider_name'),
-                'name'              => data_get($authUser, 'name'),
-                'email'             => data_get($authUser, 'email'),
-                'avatar'            => data_get($authUser, 'avatar'),
-                'orggid'            => data_get($authUser, 'orggid'),
-                'password'          => Hash::make(Str::password()),
-            ]);
         }
+        $user->forceFill([
+            'oauth_provider_id' => data_get($authUser, 'id'),
+            'oauth_provider'    => config('identity.provider_name'),
+            'name'              => data_get($authUser, 'name'),
+            'email'             => data_get($authUser, 'email'),
+            'avatar'            => data_get($authUser, 'avatar'),
+            'orggid'            => data_get($authUser, 'orggid'),
+            'password'          => Hash::make(Str::password()),
+        ]);
         return $user;
     }
 
